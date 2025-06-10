@@ -41,7 +41,7 @@ $('#productForm').on("submit", function (e) {
     data: $this.serialize(),
     type: $this.attr('method'),
     complete: function () {
-      
+      initTable();
     },
     success: function (res) {
       $.toast({
@@ -82,13 +82,7 @@ function initTable() {
     "bInfo": false,
     "bPaginate": true,
     "pageLength": 10,
-    "order": [[2, 'desc']],
-    "columnDefs": [
-      {
-        "targets": [0, 1, 2],
-        "className": 'text-center',
-      }
-    ]
+    "ordering": false
   });
 
   let loadingSpinner = `<div class="d-flex justify-content-center">
@@ -127,18 +121,18 @@ function initTable() {
             <td class="text-center">
                 ${single.quantity}
             </td>
-            <td>
-                ${single.price}
+            <td class="text-center">
+                ${formatDollar(single.price)}
             </td>
-            <td>
+            <td class="text-center">
                 ${single.created_at}
             </td>
-            <td>
-                ${totalValue}
+            <td class="text-center">
+                ${formatDollar(totalValue)}
             </td>
         </tr>`;
       }
-      $('#totalPrice').html(totalAmount);
+      $('#totalPrice').html(formatDollar(totalAmount));
 
     },
     error: function (err) {

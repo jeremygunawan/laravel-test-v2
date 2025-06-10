@@ -71,26 +71,19 @@
         <table id="product-table" class="table table-striped">
           <thead>
             <tr>
-              <th scope="col">Product Name</th>
-              <th scope="col">Quantity in stock</th>
-              <th scope="col">Price per item</th>
-              <th scope="col">Datetime submitted</th>
-              <th scope="col">Total value number</th>
+              <th scope="col" class="text-center">Product Name</th>
+              <th scope="col" class="text-center">Quantity in stock</th>
+              <th scope="col" class="text-center">Price per item</th>
+              <th scope="col" class="text-center">Datetime submitted</th>
+              <th scope="col" class="text-center">Total value number</th>
             </tr>
           </thead>
           <tbody id="productList">
-            <tr>
-              <td>Test</td>
-              <td>2</td>
-              <td>$2.00</td>
-              <td>10-06-2025 22:46</td>
-              <td>$4.00</td>
-            </tr>
           </tbody>
           <tfoot>
             <tr>
               <td colspan="4" class="text-end">Total:</td>
-              <td id="totalPrice">$0.00</td>
+              <td id="totalPrice" class="text-center fw-bold">$0.00</td>
             </tr>
         </table>
 
