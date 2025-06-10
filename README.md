@@ -13,3 +13,5 @@ To run the project:
 3. Open browser then put url localhost:8000 if the default port is not being used by other application.
 4. Done
 
+you can find repository for this website in here:
+https://github.com/jeremygunawan/laravel-test-v2
