@@ -83,30 +83,42 @@ class ProductController extends Controller
      * @param  mixed $request
      * @return json
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //validate form
         $request->validate(
             [
-                'name'         => ['required', 'min:7'],
-                'project'  => ['required']
+                'id'  => ['required', 'numeric'],
+                'name'  => ['required', 'min:5'],
+                'quantity'  => ['required', 'numeric', 'min:1'],
+                'price'  => ['required', 'numeric']
             ],
             [
-                'name.min' => 'Minimun: :min characters!'
+                'productName.min' => 'Product Name Minimun: :min characters!'
             ]
         );
 
-        $authUser = Auth::user();
-
-        //update Task
-        Task::where('id', $id)->update([
-            'name'         => $request->post('name'),
-            'project_id'    => $request->post('project'),
-        ]);
+        //get old data
+        $oldData = Storage::disk('public')->get('products.json');
+        $oldData = json_decode($oldData);
+        if ($oldData === null) {
+            $oldData = [];
+        }
+        
+        foreach ($oldData as $key => $product) {
+            if ($product->id == $request->post('id')) {
+                $product->name = $request->post('name');
+                $product->quantity = $request->post('quantity');
+                $product->price = $request->post('price');
+                break;
+            }
+        }
+        
+        Storage::disk('public')->put('products.json', json_encode($oldData));
 
         return response()->json([
             'code' => '200',
-            'message' => 'Task Updated',
+            'message' => 'Product Updated',
             'data' => []
         ], 200);
     }
@@ -119,12 +131,25 @@ class ProductController extends Controller
      */
     public function delete(Request $request)
     {
-        //Delete Task
-        Task::where('id', $request->post('id'))->delete();
+        //Delete Product
+        $oldData = Storage::disk('public')->get('products.json');
+        $oldData = json_decode($oldData);
+        if ($oldData === null) {
+            $oldData = [];
+        }
+
+        foreach ($oldData as $key => $product) {
+            if ($product->id == $request->post('id')) {
+                unset($oldData[$key]);
+                break;
+            }
+        }
+
+        Storage::disk('public')->put('products.json', json_encode($oldData));
 
         return response()->json([
             'code' => '200',
-            'message' => 'Task Deleted',
+            'message' => 'Product Deleted',
             'data' => []
         ], 200);
     }

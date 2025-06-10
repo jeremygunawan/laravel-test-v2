@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
 
   <title>Laravel Test V2</title>
 
@@ -13,6 +14,7 @@
 
   <!-- Styles / Scripts -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+  <link href="{{ asset('assets/thirdparty/fontawesome/css/all.css') }}" rel="stylesheet" />
   <link href="{{ asset('assets/thirdparty/toast/jquery.toast.min.css') }}" rel="stylesheet" />
   
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -76,6 +78,7 @@
               <th scope="col" class="text-center">Price per item</th>
               <th scope="col" class="text-center">Datetime submitted</th>
               <th scope="col" class="text-center">Total value number</th>
+              <th scope="col" class="text-center">Actions</th>
             </tr>
           </thead>
           <tbody id="productList">
@@ -84,6 +87,7 @@
             <tr>
               <td colspan="4" class="text-end">Total:</td>
               <td id="totalPrice" class="text-center fw-bold">$0.00</td>
+              <td></td>
             </tr>
         </table>
 
