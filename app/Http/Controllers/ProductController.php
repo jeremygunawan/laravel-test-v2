@@ -140,7 +140,7 @@ class ProductController extends Controller
 
         foreach ($oldData as $key => $product) {
             if ($product->id == $request->post('id')) {
-                unset($oldData[$key]);
+                array_splice($oldData, $key, 1);
                 break;
             }
         }
